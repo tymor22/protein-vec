@@ -29,4 +29,6 @@ To follow an instructional tutorial of how to use Protein-Vec, follow along with
 
 In this notebook, you will learn how to encode proteins using Protein-Vec, and visualize/cluster those proteins. You will also learn how to search using Protein-Vec.
 
+For a dataset with sequences and other meta data fields to follow the tutorial notebook, you can download the uniprot data as follows:
+> wget https://users.flatironinstitute.org/thamamsy/public_www/uniprotkb_AND_reviewed_true_2023_07_03.tsv
 
