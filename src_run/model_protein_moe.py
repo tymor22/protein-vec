@@ -104,8 +104,8 @@ class trans_basic_block(pl.LightningModule):
             param.requires_grad = False
 
         ################## GENE3D model
-        vec_model_cpnt_gene3D = 'protein_vec_models/aspect_vec_gene3D.ckpt'
-        vec_model_config_gene3D = 'protein_vec_models/aspect_vec_gene3D_params.json'
+        vec_model_cpnt_gene3D = 'protein_vec_models/aspect_vec_gene3d.ckpt'
+        vec_model_config_gene3D = 'protein_vec_models/aspect_vec_gene3d_params.json'
         #Load the model
         vec_model_config_gene3D = trans_basic_block_Config_single.from_json(vec_model_config_gene3D)
         self.model_aspect_gene3D = trans_basic_block_single.load_from_checkpoint(vec_model_cpnt_gene3D, config=vec_model_config_gene3D)
