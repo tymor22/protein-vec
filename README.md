@@ -4,10 +4,15 @@ Here are instructions for how to use Protein-Vec.
 
 First, install the GitHub repository as follows:
 > git clone https://github.com/tymor22/protein-vec.git
+
 Install required packages, run from within the protein-vec directory:
+
 > pip install .
+
 > pip install seaborn
+
 > pip install faiss-gpu
+
 > pip install jupyter notebook
 
 # Download Protein-Vec mixture of experts model and each of the Aspect-Vec (expert) models
