@@ -9,11 +9,7 @@ Install required packages, run from within the protein-vec directory:
 
 > pip install .
 
-> pip install seaborn
-
-> pip install faiss-gpu
-
-> pip install jupyter notebook
+> pip install seaborn faiss-gpu jupyter notebook
 
 # Download Protein-Vec mixture of experts model and each of the Aspect-Vec (expert) models
 
