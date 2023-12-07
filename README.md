@@ -41,7 +41,10 @@ In this notebook, you will learn how to encode proteins using Protein-Vec, and v
 
 For a dataset with sequences and other meta data fields to follow the tutorial notebook, you can download the uniprot data as follows:
 > wget https://users.flatironinstitute.org/thamamsy/public_www/uniprotkb_AND_reviewed_true_2023_07_03.tsv
+
+
 Create the directory data/ in the src_run/ directory, and move the dataset file to it:
 > mkdir src_run/data/
+
 > mv uniprotkb_AND_reviewed_true_2023_07_03.tsv src_run/data/
 
