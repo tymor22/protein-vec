@@ -67,6 +67,7 @@ def get_masks():
     all_cols = np.array(["TM", "PFAM", "GENE3D", "ENZYME", "MFO", "BPO", "CCO"])
     masks = [all_cols[k] in sampled_keys for k in range(len(all_cols))]
     masks = torch.logical_not(torch.tensor(masks, dtype=torch.bool))[None, :]
+    return masks
 
 
 def load_data(input_csv, input_fasta, output_csv):
@@ -81,7 +82,10 @@ def load_data(input_csv, input_fasta, output_csv):
     return df
 
 
-def main():
+def main(args):
+    if args.input_csv is None and args.input_fasta is None:
+        raise ValueError("Must provide either input_csv or input_fasta")
+
     df = load_data(args.input_csv, args.input_fasta, args.output_csv)
 
     model, tokenizer = get_tokenizer(args.ProtTrans_model, args.ProtTrans_tokenizer)
@@ -90,7 +94,7 @@ def main():
     masks = get_masks()
 
     embeddings = encode(
-        df["Sequence"].values, model_deep, model, tokenizer, masks, device
+        df["Sequence"].values, model_deep, model, tokenizer, masks, device, args.batch_size
     )
     # save the embeddings
     np.save(args.output_file, embeddings)
@@ -131,6 +135,9 @@ if __name__ == "__main__":
         type=str,
         help="output file for embeddings",
         default="embeddings.npy",
+    )
+    parser.add_argument(
+        "--batch_size", type=int, help="batch size for embeddings", default=8
     )
 
     args = parser.parse_args()
