@@ -87,6 +87,7 @@ def main(args):
         raise ValueError("Must provide either input_csv or input_fasta")
 
     df = load_data(args.input_csv, args.input_fasta, args.output_csv)
+    print(f"{len(df)} sequences loaded")
 
     model, tokenizer = get_tokenizer(args.ProtTrans_model, args.ProtTrans_tokenizer)
     model_deep = load_vec_model(args.vec_model_cpnt, args.vec_model_config)
@@ -96,6 +97,8 @@ def main(args):
     embeddings = encode(
         df["Sequence"].values, model_deep, model, tokenizer, masks, device, args.batch_size
     )
+    print(f"embeddings generated with shape {embeddings.shape}")
+
     # save the embeddings
     np.save(args.output_file, embeddings)
 
@@ -136,8 +139,9 @@ if __name__ == "__main__":
         help="output file for embeddings",
         default="embeddings.npy",
     )
+    # TODO: batch size doesn't work currently
     parser.add_argument(
-        "--batch_size", type=int, help="batch size for embeddings", default=8
+        "--batch_size", type=int, help="batch size for embeddings", default=1
     )
 
     args = parser.parse_args()

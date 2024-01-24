@@ -64,10 +64,10 @@ def embed_vec(prottrans_embedding, model_deep, masks, device):
     return vec_embedding.cpu().detach().numpy()
 
 
-def encode(sequences, model_deep, model, tokenizer, masks, device, batch_size=50):
+def encode(sequences, model_deep, model, tokenizer, masks, device, batch_size=1):
+    # TODO: changing the batch size doesn't actually work for returning sequences of the same length
     embed_all_sequences = []
     num_seqs = len(sequences)
-    print(num_seqs)
     for i in tqdm(range(0, num_seqs, batch_size)):
         j = min(i + batch_size, num_seqs)
         protrans_sequence = featurize_prottrans(
@@ -76,3 +76,5 @@ def encode(sequences, model_deep, model, tokenizer, masks, device, batch_size=50
         embedded_sequence = embed_vec(protrans_sequence, model_deep, masks, device)
         embed_all_sequences.append(embedded_sequence)
     return np.concatenate(embed_all_sequences, axis=0)
+
+
